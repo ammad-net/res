@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Creative Drag Papers ❤️</title>
+  <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Short+Stack&amp;family=Homemade+Apple&amp;display=swap'>
+  <style>
+    /* General Page Styling */
+    body {
+      font-family: 'Short Stack', cursive;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f7f7f7;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    /* Paper Elements */
+    .paper {
+      width: 250px;
+      height: auto;
+      background-color: #fff;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+      padding: 15px;
+      position: absolute;
+      cursor: move;
+      transition: all 0.3s ease;
+      text-align: center;
+      z-index: 1;
+    }
+
+    /* Text and Image Styling */
+    .paper img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin: 10px 0;
+    }
+
+    .paper p {
+      margin: 10px 0;
+      font-family: 'Homemade Apple', cursive;
+      font-size: 18px;
+      color: #333;
+    }
+
+    /* Red Paper Styling */
+    .paper.red {
+      background-color: #ffcccc;
+      border-color: #ff4d4d;
+    }
+
+    .paper.red .p1 {
+      color: #ff4d4d;
+    }
+
+    /* Hover and Active Effects */
+    .paper:hover {
+      transform: scale(1.05);
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .paper:active {
+      transform: scale(1);
+    }
+
+    /* Additional Paper Styling for Visual Appeal */
+    .paper:nth-child(odd) {
+      transform: rotate(-3deg);
+    }
+
+    .paper:nth-child(even) {
+      transform: rotate(3deg);
+    }
+
+    /* Responsiveness */
+    @media (max-width: 768px) {
+      .paper {
+        width: 200px;
+        padding: 10px;
+      }
+
+      .paper p {
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .paper {
+        width: 150px;
+      }
+
+      .paper p {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Drag Papers -->
+<div class="paper heart">
+  <p> A Special Gift for You ❤️ </p>
+</div>
+
+<div class="paper image">
+  <p>My Madam 😍</p>
+  <img src="images/5.jpeg" alt="Gift Image 1" />
+</div>
+
+<div class="paper image">
+  <p> You are always in my thoughts </p>
+  <img src="images/6.jpeg" alt="Gift Image 2" />
+</div>
+
+<div class="paper image">
+  <p>How can someone be so cute? ❤️</p>
+  <img src="images/4.jpg" alt="Gift Image 3" />
+</div>
+
+<div class="paper red">
+  <p class="p1">And My Favorite Person 😍</p>
+</div>
+
+<div class="paper">
+  <p class="p1">You are Cute</p>
+  <p class="p1">Amazing <span style="color: red !important;">❤️</span></p>
+</div>
+
+<div class="paper">
+  <p class="p1">Drag the papers to move!</p>
+</div>
+
+<script>
+  const papers = document.querySelectorAll('.paper');
+
+  papers.forEach(paper => {
+    paper.addEventListener('mousedown', (e) => {
+      let shiftX = e.clientX - paper.getBoundingClientRect().left;
+      let shiftY = e.clientY - paper.getBoundingClientRect().top;
+
+      const moveAt = (pageX, pageY) => {
+        paper.style.left = pageX - shiftX + 'px';
+        paper.style.top = pageY - shiftY + 'px';
+      };
+
+      const onMouseMove = (event) => {
+        moveAt(event.pageX, event.pageY);
+      };
+
+      document.addEventListener('mousemove', onMouseMove);
+
+      paper.onmouseup = () => {
+        document.removeEventListener('mousemove', onMouseMove);
+        paper.onmouseup = null;
+      };
+    });
+
+    paper.ondragstart = () => false; // Disable default drag behavior
+  });
+</script>
+
+</body>
+</html>
